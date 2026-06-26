@@ -39,7 +39,7 @@ This is the GEO/SEO quality gate. If an item fails, fix before deploy.
 - [ ] Images use Astro `<Image />` for optimization where possible
 
 ## 6. Forms & islands
-- [ ] `PUBLIC_WEB3FORMS_KEY` set in the client's `.env` (their own key)
+- [ ] `WEB3FORMS_KEY` set in Netlify environment variables (their own key)
 - [ ] Test submission sent — confirm it lands in the client's inbox
 - [ ] Honeypot (`botcheck`) field present
 - [ ] Mobile menu opens/closes; FAQ accordion expands/collapses
