@@ -31,7 +31,7 @@ const schema = {
       ...(legalName ? { legalName } : {}),
       description,
       telephone: phone,
-      email,
+      ...(email ? { email } : {}),
       url: domain,
       logo: logoSchemaUrl,
       image: `${domain}${ogImage}`,
@@ -77,7 +77,11 @@ const schema = {
           '@type': 'Service',
           name: service.name,
           description: service.description,
-          url: service.url ? `${domain}${service.url}` : domain,
+          url: service.url
+              ? (service.url.startsWith('https://') || service.url.startsWith('http://')
+                  ? service.url
+                  : `${domain}${service.url}`)
+              : domain,
           provider: { '@id': `${domain}/#business` },
         },
       })),

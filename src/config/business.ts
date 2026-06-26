@@ -97,69 +97,123 @@ export interface Business {
 // PLACEHOLDER — replace every value before launch.
 // Phone 555-555-0100 and domain replace-me.example are intentionally fake.
 // ---------------------------------------------------------------------------
+
 export const BUSINESS: Business = {
-  name: "Acme Demo Co — REPLACE ME",
-  legalName: "Acme Demo Co LLC — REPLACE ME",
+  name: "Roosters Health Store",
+  legalName: undefined,
 
-  phone: "(555) 555-0100",
-  email: "hello@replace-me.example",
+  phone: "(618) 281-7177",
+  email: "",
 
-  streetAddress: "1 Placeholder Lane",
-  addressLocality: "Anytown",
+  streetAddress: "216 W Sand Bank Rd, Suite #4",
+  addressLocality: "Columbia",
   addressRegion: "IL",
-  postalCode: "00000",
+  postalCode: "62236",
   addressCountry: "US",
 
-  geo: { latitude: 0, longitude: 0 },
+  geo: { latitude: 38.457027, longitude: -90.222393 },
 
-  domain: "https://www.replace-me.example",
+  domain: "https://roostershealthstore.com",
 
   description:
-    "Replace this with a real business description — keep it under 160 characters for best meta results.",
-  tagline: "Replace This Tagline",
+    "Family-owned health and wellness store serving Columbia, IL and Monroe County since 1995. Supplements, organic grocery, wellness bar, and onsite practitioners.",
+  tagline:
+    "Start your journey to sustainable and responsible health & wellness",
 
-  businessType: "LocalBusiness",
+  businessType: "HealthAndBeautyBusiness",
   priceRange: "$$",
-  areaServed: ["Anytown", "Replace Me"],
+  areaServed: ["Columbia", "Waterloo", "Millstadt", "Dupo", "Monroe County"],
 
   hours: [
-    { days: "Monday–Friday", hours: "9:00 AM – 5:00 PM" },
-    { days: "Saturday–Sunday", hours: "Closed" },
+    { days: "Monday–Friday", hours: "8:30 AM – 5:30 PM" },
+    { days: "Saturday", hours: "8:30 AM – 2:00 PM" },
+    { days: "Sunday", hours: "Closed" },
   ],
-  openingHours: ["Mo-Fr 09:00-17:00"],
-
-  foundingDate: "2000",
-  founders: ["Replace Me"],
+  openingHours: ["Mo-Fr 08:30-17:30", "Sa 08:30-14:00"],
 
   services: [
     {
-      name: "Service One — Replace Me",
-      description: "Replace with a real service description.",
-      // url: "/services/slug" — add only when a dedicated page exists
+      name: "Supplements & Vitamins",
+      description:
+        "A comprehensive range of vitamins, minerals, homeopathic remedies, essential oils, and medicinal teas sourced from responsible, independent brands — no big-pharma or private-label shortcuts.",
     },
     {
-      name: "Service Two — Replace Me",
-      description: "Replace with a real service description.",
+      name: "Organic & Natural Grocery",
+      description:
+        "Locally sourced, organic, and chemical-free grocery focused on independent brands. Options for dairy-free, gluten-free, vegan, keto, and diabetic-friendly diets.",
+    },
+    {
+      name: "Wellness Bar",
+      description:
+        "Fresh, in-store wellness offerings designed to support your daily nutrition and recovery goals.",
+    },
+    {
+      name: "Health & Beauty Products",
+      description:
+        "Natural and chemical-free health, beauty, and personal-care products — including a wide selection for children and pets.",
+    },
+    {
+      name: "Licensed Massage Therapy",
+      description:
+        "Appointments with licensed massage therapist Kaila Taylor, including Swedish massage, Reiki, cupping, lymphatic drainage, and prenatal massage.",
+      url: "https://kaila-taylor-lmt.square.site/",
+    },
+    {
+      name: "The RooSt — Longevity Center",
+      description:
+        "Our in-store longevity center featuring the SuperHuman Protocol: a three-step sequence of PEMF therapy, Exercise with Oxygen Therapy (EWOT), and Red Light Therapy to support cellular health and recovery.",
+    },
+    {
+      name: "Special Product Sourcing",
+      description:
+        "Can't find what you're looking for? We'll source specific products on request — part of what being a true community store means.",
     },
   ],
 
   faq: [
     {
-      question: "Replace with a real FAQ question?",
-      answer: "Replace with a real answer.",
+      question: "Do you do special orders?",
+      answer:
+        "Absolutely. If you're looking for a specific product we don't carry, just ask — we'll source it for you. That's what being a community store means.",
     },
     {
-      question: "Another placeholder FAQ question?",
-      answer: "Another placeholder answer.",
+      question: "What kind of supplements do you carry?",
+      answer:
+        "A comprehensive range of vitamins, minerals, homeopathic remedies, essential oils, and medicinal teas from responsibly sourced, independent brands — no big-pharma or private-label shortcuts.",
+    },
+    {
+      question: "What makes your grocery section different?",
+      answer:
+        "We focus on locally sourced, organic, and chemical-free products. We prioritize independent brands and carry options for dairy-free, gluten-free, vegan, keto, and diabetic-friendly diets. Freshness is everything to us.",
+    },
+    {
+      question: "What is The RooSt?",
+      answer:
+        "The RooSt is our in-store longevity center featuring the SuperHuman Protocol — a three-step sequence of PEMF therapy, Exercise with Oxygen Therapy (EWOT), and Red Light Therapy designed to improve cellular health and recovery.",
+    },
+    {
+      question: "Can I book a massage with Kaila Taylor?",
+      answer:
+        "Yes. Kaila Taylor is a licensed massage therapist offering Swedish massage, Reiki, cupping, lymphatic drainage, and prenatal massage. Use the contact form in our Practitioners section to request an appointment.",
+    },
+    {
+      question: "Are your products safe for kids and pets?",
+      answer:
+        "We carry a wide selection of natural products specifically for children and pets, including natural baby medicines, diapers, and wipes. Our staff is happy to help you find the right fit for your family.",
     },
   ],
 
   social: {
-    googleBusinessProfile: "https://maps.app.goo.gl/replace-me",
-    facebook: "https://www.facebook.com/replace-me",
+    facebook: "https://www.facebook.com/roosterhealth",
+    instagram: "https://www.instagram.com/roosters.healthstore/",
+    googleBusinessProfile: "https://share.google/gCBfYPJ1I1Rnm2yI0",
   },
+
 
   logo: "/assets/logo.svg",
   logoRaster: "/assets/logo.png",
-  ogImage: "/assets/og-image.png",
+  ogImage: "/assets/og-image.jpg",
+
+  foundingDate: "1995",
+  founders: undefined,
 };

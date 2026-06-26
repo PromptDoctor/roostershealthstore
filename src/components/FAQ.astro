@@ -1,22 +1,17 @@
 ---
 import { BUSINESS } from '../config/business';
-
-interface Props {
-  /** Section heading — defaults to "Frequently Asked Questions" */
-  heading?: string;
-}
-
-const { heading = 'Frequently Asked Questions' } = Astro.props;
 ---
 
-<section aria-labelledby="faq-heading">
-  <h2 id="faq-heading">{heading}</h2>
-  <dl>
-    {BUSINESS.faq.map((item) => (
-      <details>
-        <summary>{item.question}</summary>
-        <dd>{item.answer}</dd>
-      </details>
-    ))}
-  </dl>
-</section>
+<div class="faq-list">
+  {BUSINESS.faq.map((item) => (
+    <details class="faq-item">
+      <summary class="faq-summary">
+        <span class="faq-q">{item.question}</span>
+        <span class="faq-icon" aria-hidden="true"></span>
+      </summary>
+      <div class="faq-body">
+        <p>{item.answer}</p>
+      </div>
+    </details>
+  ))}
+</div>

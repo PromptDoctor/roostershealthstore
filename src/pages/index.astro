@@ -1,4 +1,14 @@
 ---
+import '@fontsource/playfair-display/400.css';
+import '@fontsource/playfair-display/400-italic.css';
+import '@fontsource/playfair-display/700.css';
+import '@fontsource/playfair-display/700-italic.css';
+import '@fontsource/playfair-display/900.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
+import '@fontsource/dm-sans/700.css';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
 import ContactForm from '../components/ContactForm';
@@ -6,52 +16,1348 @@ import MobileMenu from '../components/MobileMenu';
 import { BUSINESS } from '../config/business';
 
 const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '#services' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Shop',         href: '#services' },
+  { label: 'Wellness Bar', href: '#bar'      },
+  { label: 'About Us',     href: '#about'    },
+  { label: 'Contact',      href: '#contact'  },
 ];
 
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
+
+const heroSlides = [
+  {
+    src: '/assets/outside-rooster-statue-with-flowers.jpg',
+    alt: "Roosters Health Store rooster statue surrounded by red azaleas at 216 W Sand Bank Rd, Columbia IL",
+    label: 'Rooster Statue',
+  },
+  {
+    src: '/assets/outside_rooster_sign_health_store_wellness_bar_local_columbia.jpg',
+    alt: "Rooster's Health Store & Wellness Bar exterior sign on a building facade in Columbia, Illinois",
+    label: 'Store Exterior',
+  },
+  {
+    src: '/assets/local_sourced_farms_organic_columbia_health.jpg',
+    alt: 'Locally sourced organic produce and farm goods displayed in the store',
+    label: 'Local & Organic Produce',
+  },
+  {
+    src: '/assets/wellness_bar_smoothie_fruit_health_local_organic_columbia.jpg',
+    alt: 'Fresh colorful fruit smoothie prepared at the Roosters wellness bar counter',
+    label: 'Wellness Bar',
+  },
+  {
+    src: '/assets/roosters_health_store_doors_local_columbia_illinois_organic.jpg',
+    alt: "Glass entrance doors to Rooster's Health Store in Columbia, Illinois",
+    label: 'Store Entrance',
+  },
+  {
+    src: '/assets/health_self_heal_thy_self_wall_art.jpg',
+    alt: '"Heal Thy Self" inspirational wellness quote displayed as wall art inside the store',
+    label: 'Community Wellness',
+  },
+];
+
+
+const kailaBookingUrl =
+  BUSINESS.services.find((s) => s.name === 'Licensed Massage Therapy')?.url ?? '#contact';
+
+const strip1 = [
+  { src: '/assets/in-house-tea-making-with-recipe.jpg',                       alt: 'In-house herbal tea preparation with recipe card at Roosters Health Store' },
+  { src: '/assets/jars-of-organic-spices.jpg',                                alt: 'Glass jars of organic spices and herbs on a shelf at Roosters Health Store' },
+  { src: '/assets/outside-rooster-statue-with-flowers.jpg',                   alt: 'Roosters Health Store rooster statue surrounded by red azaleas' },
+  { src: '/assets/roosters_health_store_doors_local_columbia_illinois_organic.jpg', alt: 'Roosters Health Store glass entrance doors in Columbia, Illinois' },
+  { src: '/assets/roosters-sweet-dreams-tea.jpg',                             alt: 'Roosters Health Store Sweet Dreams herbal tea blend' },
+  { src: '/assets/natural_bath_soak_roosters_health_organic.jpg',             alt: 'Natural organic bath soak product from Roosters Health Store' },
+  { src: '/assets/health_self_heal_thy_self_wall_art.jpg',                    alt: '"Heal Thy Self" inspirational wellness quote wall art inside the store' },
+  { src: '/assets/roosters_magnesium_spray_local_organic_product_health_store.jpg', alt: 'Roosters brand magnesium spray — a locally made organic health product' },
+];
+
+const strip2 = [
+  { src: '/assets/farm-fresh-strawberries-and-greens.jpg',  alt: 'Farm-fresh strawberries and organic greens from local suppliers' },
+  { src: '/assets/chickpea-and-organic-greens-salad.jpg',   alt: 'Chickpea and organic greens salad from the Roosters wellness bar' },
+  { src: '/assets/ham-turkey-house-salad.jpg',              alt: 'Ham and turkey house salad prepared fresh at the Roosters wellness bar' },
+  { src: '/assets/organic-peaches.jpg',                     alt: 'Organic peaches from a local farm supplier' },
+  { src: '/assets/organic-farm-fresh-eggs.jpg',             alt: 'Organic farm-fresh eggs from local producers in Monroe County' },
+  { src: '/assets/pink-smoothie-outside-backdrop.jpg',      alt: 'Vibrant pink wellness smoothie with an outdoor backdrop' },
+  { src: '/assets/strawberries-organic.jpg',                alt: 'Fresh organic strawberries ready for use in the wellness bar' },
+  { src: '/assets/cat-omnom.jpg',                           alt: 'The Roosters Health Store cat surrounded by fresh greens — a beloved store mascot' },
+];
+
+const featuredServices = [
+  {
+    label: 'Natural Grocery',
+    title: 'Local & Organic Produce',
+    desc: 'Farm-fresh local dairy, meats, and produce from producers you can name. Dairy-free, gluten-free, keto — we carry it because someone in this community needs it.',
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>`,
+  },
+  {
+    label: 'Supplements',
+    title: 'Vitamins & Apothecary',
+    desc: 'Responsibly sourced vitamins, essential oils, and medicinal teas. Our onsite nutritionist helps you find exactly what your body needs — no guesswork.',
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>`,
+  },
+  {
+    label: 'Wellness Bar',
+    title: "Monroe County's Only Wellness Bar",
+    desc: 'Organic remedy teas, smoothies crafted for your health goals, kombucha on tap, and frappes without the junk. Our bar staff double as wellness coaches.',
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+  },
+  {
+    label: 'Health & Beauty',
+    title: 'Non-Toxic Personal Care',
+    desc: 'Paraben-free, sulfate-free, and chemical-clean. From fluoride-free toothpastes to organic baby care — what goes on your body matters as much as what goes in it.',
+    icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+  },
+];
+
+const reviews = [
+  {
+    name: 'Sean A.',
+    text: "Super helpful staff. Have stopped in several times for a variety of things. They are patient with questions and will help understand what you're after to ensure it's the right fit. They have a new tea bar too that's great!",
+    stars: 5,
+    rotate: '-1.5deg',
+    mt: '0px',
+  },
+  {
+    name: 'A.H.',
+    text: "Roosters is a hidden gem in Columbia, IL! Love the concept, the thought put into selecting and sourcing quality, healthy and organic products, local produce, and freshly made salads and protein shakes. Just tried a healthy protein smoothie and loved it! MUST CHECK!!! Great little store in a small town with healthy options!",
+    stars: 5,
+    rotate: '1.2deg',
+    mt: '28px',
+  },
+  {
+    name: 'Hillary',
+    text: "Been here a few times and the service is always great. The owner was so so kind and helpful! She gave me some ideas and even sent me home with some greens she uses for her smoothies for free! Support your local businesses, especially this one!",
+    stars: 5,
+    rotate: '-0.8deg',
+    mt: '0px',
+  },
+  {
+    name: 'Amanda S.',
+    text: "My experience was amazing! They are very knowledgeable and helped me find what I was looking for. HUGE variety of products from supplements to baby products to bar soaps. I also love how they have natural baby medicines/diapers & wipes. Also the smoothies are AMAZING!! Great down-to-earth people!!",
+    stars: 5,
+    rotate: '1.8deg',
+    mt: '16px',
+  },
+  {
+    name: 'Jennifer',
+    text: "Simply Amazing. Love this place. Caring staff. Made the perfect smoothie for me to finish my day!!!!",
+    stars: 5,
+    rotate: '-1.2deg',
+    mt: '0px',
+  },
+  {
+    name: 'Lindsey R.',
+    text: "I absolutely love this place! Their smoothies are amazingly good! The people in there are so knowledgeable about everything and anything!!",
+    stars: 5,
+    rotate: '0.8deg',
+    mt: '24px',
+  },
+];
 ---
 
-<BaseLayout title={BUSINESS.name}>
-  <header>
-    <MobileMenu links={navLinks} client:load />
+<BaseLayout
+  title={`${BUSINESS.name} — Columbia, IL Health Store & Wellness Bar`}
+  description={BUSINESS.description}
+>
+  <!-- ── NAV ─────────────────────────────────────────────────────── -->
+  <header id="top" class="site-header">
+    <div class="nav-inner">
+      <a href="/" class="logo-link" aria-label={`${BUSINESS.name} — home`}>
+        <img
+          src={BUSINESS.logo}
+          alt={BUSINESS.name}
+          class="nav-logo"
+          width="200"
+          height="56"
+        />
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary navigation">
+        <ul class="nav-links">
+          {navLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+        <a href="#contact" class="btn btn--nav">Visit Us</a>
+      </nav>
+
+      <div class="mobile-nav-wrap">
+        <MobileMenu links={navLinks} ariaLabel="Mobile navigation" client:load />
+      </div>
+    </div>
   </header>
 
   <main>
-    <section>
-      <h1>{BUSINESS.name}</h1>
-      <p>{BUSINESS.tagline}</p>
-      <p>{BUSINESS.description}</p>
-      <ul>
-        <li><a href={`tel:${BUSINESS.phone}`}>{BUSINESS.phone}</a></li>
-        <li><a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a></li>
-        <li>
-          {BUSINESS.streetAddress}, {BUSINESS.addressLocality},{' '}
-          {BUSINESS.addressRegion} {BUSINESS.postalCode}
-        </li>
-      </ul>
+    <!-- ── HERO ───────────────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <!-- Slide backgrounds — aria-hidden; decorative photos -->
+      <div class="hero-slides" aria-hidden="true">
+        {heroSlides.map((slide, i) => (
+          <div class={`hero-slide${i === 0 ? ' active' : ''}`} data-slide={i}>
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              loading={i === 0 ? 'eager' : 'lazy'}
+              decoding={i === 0 ? 'sync' : 'async'}
+              class="hero-img"
+              width="1920"
+              height="1080"
+            />
+          </div>
+        ))}
+      </div>
+
+      <!-- Dark gradient overlay -->
+      <div class="hero-overlay" aria-hidden="true"></div>
+
+      <!-- Content — always in static DOM, always readable -->
+      <div class="hero-content">
+        <span class="label label--light">Columbia, Illinois — Since {BUSINESS.foundingDate}</span>
+        <h1 id="hero-heading" class="hero-h1">
+          Where fresh, local,<br /><em>and natural</em> meet.
+        </h1>
+        <p class="hero-sub">
+          Family-owned community wellness — from farm-fresh local groceries and an
+          apothecary bar to advanced recovery therapies. Your neighbors know your
+          name here.
+        </p>
+        <div class="hero-ctas">
+          <a href="#services" class="btn">Explore the Store</a>
+          <a href="#bar" class="btn btn--ghost-light">Visit Our Wellness Bar</a>
+        </div>
+      </div>
+
+      <!-- Carousel controls -->
+      <div class="hero-controls" role="group" aria-label="Carousel controls">
+        <button class="hero-arrow hero-prev" aria-label="Previous slide" type="button">
+          &#8249;
+        </button>
+        <div class="hero-dots">
+          {heroSlides.map((slide, i) => (
+            <button
+              class={`hero-dot${i === 0 ? ' active' : ''}`}
+              aria-label={`Slide ${i + 1}: ${slide.label}`}
+              aria-pressed={i === 0 ? 'true' : 'false'}
+              data-dot={i}
+              type="button"
+            ></button>
+          ))}
+        </div>
+        <button class="hero-arrow hero-next" aria-label="Next slide" type="button">
+          &#8250;
+        </button>
+      </div>
+
+      <!-- Current slide label (bottom-right, screen-reader live region) -->
+      <div class="hero-photo-label">
+        <span aria-hidden="true">PHOTO:&nbsp;</span>
+        <span id="hero-label-text" aria-live="polite" aria-atomic="true">
+          {heroSlides[0].label}
+        </span>
+      </div>
     </section>
 
-    <section id="faq">
-      <FAQ />
+    <!-- ── BATCH 2: Services + Store Photos + Wellness Bar ────────── -->
+    <!-- SERVICES -->
+    <section id="services" class="services-section" aria-labelledby="services-heading">
+      <div class="inner fade-in">
+        <div class="section-header">
+          <span class="label">What We Offer</span>
+          <h2 id="services-heading" class="sky-heading">
+            Everything your body needs, <em>under one roof.</em>
+          </h2>
+          <p>
+            From farm to supplement to smoothie — {BUSINESS.name} is the only stop
+            you need for a fully nourished life in Monroe County.
+          </p>
+        </div>
+        <div class="services-grid">
+          {featuredServices.map((svc) => (
+            <article class="service-card">
+              <div class="service-icon" set:html={svc.icon} aria-hidden="true"></div>
+              <div class="service-label">{svc.label}</div>
+              <h3 class="service-title">{svc.title}</h3>
+              <p class="service-desc">{svc.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <!-- Counter-scrolling photo strip -->
+      <div class="offer-strip" aria-label="Store and product photos">
+        <!-- Row 1: scrolls left -->
+        <div class="offer-strip-row">
+          <div class="offer-strip-track offer-strip-left">
+            {strip1.map(p => (
+              <div class="offer-strip-card">
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" width="320" height="220" />
+              </div>
+            ))}
+            {strip1.map(p => (
+              <div class="offer-strip-card" aria-hidden="true">
+                <img src={p.src} alt="" loading="lazy" decoding="async" width="320" height="220" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <!-- Row 2: scrolls right -->
+        <div class="offer-strip-row">
+          <div class="offer-strip-track offer-strip-right">
+            {strip2.map(p => (
+              <div class="offer-strip-card">
+                <img src={p.src} alt={p.alt} loading="lazy" decoding="async" width="320" height="220" />
+              </div>
+            ))}
+            {strip2.map(p => (
+              <div class="offer-strip-card" aria-hidden="true">
+                <img src={p.src} alt="" loading="lazy" decoding="async" width="320" height="220" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <ContactForm accessKey={accessKey} client:visible />
+
+    <!-- WELLNESS BAR -->
+    <section id="bar" class="wellness-bar-section" aria-labelledby="bar-heading">
+      <div class="wellness-bar-inner fade-in">
+        <div class="wellness-bar-photo">
+          <img
+            src="/assets/wellness_bar_smoothie_fruit_health_local_organic_columbia.jpg"
+            alt="Fresh fruit smoothies and wellness drinks prepared at the Roosters bar counter"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="440"
+          />
+        </div>
+        <div class="wellness-bar-content">
+          <span class="label">Wellness Bar</span>
+          <h2 id="bar-heading" class="cream-heading">
+            The only wellness bar<br /><em>in Monroe County.</em>
+          </h2>
+          <p class="wellness-bar-desc">
+            Every drink is crafted with purpose. Our bar staff know your name and
+            your health goals — they'll build your smoothie with the right boosts,
+            suggest a remedy tea for what ails you, or pour you a kombucha while
+            you browse.
+          </p>
+          <ul class="wellness-bar-checklist" aria-label="Bar offerings">
+            {['Organic Remedy Teas', 'Custom Smoothies', 'Kombucha on Tap', 'Refreshers & Frappes'].map((item) => (
+              <li class="wellness-bar-check">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#contact" class="btn">Try the Bar</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BATCH 3: RooSt + Team + Reviews ───────────────────────── -->
+    <!-- THE ROOST -->
+    <section class="roost-section" aria-labelledby="roost-heading">
+      <div class="roost-inner fade-in">
+        <div class="roost-content">
+          <span class="label label--light">The RooSt</span>
+          <h2 id="roost-heading">
+            Advanced longevity<br /><em>starts here.</em>
+          </h2>
+          <p>
+            Our in-store recovery suite uses the SuperHuman Protocol — PEMF
+            therapy, Exercise with Oxygen (EWOT), and Red Light Therapy — to
+            improve cellular health and recovery.
+          </p>
+        </div>
+        <div class="roost-right">
+          <ul class="roost-pills" aria-label="RooSt therapies offered">
+            {['PEMF Therapy', 'Exercise with Oxygen (EWOT)', 'Red Light Therapy Bed'].map((pill) => (
+              <li class="roost-pill">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--sky2)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{pill}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="https://theroost.com" class="btn btn--ghost-navy" target="_blank" rel="noopener noreferrer">
+            Learn More at TheRooSt.com &#8594;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM / PRACTITIONERS -->
+    <section id="team" class="team-section" aria-labelledby="team-heading">
+      <div class="inner fade-in">
+        <div class="section-header">
+          <span class="label">Our Practitioners</span>
+          <h2 id="team-heading" class="sky-heading">
+            People who <em>actually care.</em>
+          </h2>
+          <p>
+            Our on-site team knows you and your goals. No generic advice — just
+            real people helping real neighbors.
+          </p>
+        </div>
+        <div class="team-grid">
+          <!-- Kaila Taylor — Massage Therapist -->
+          <article class="practitioner-card">
+            <div class="practitioner-photo">
+              <img
+                src="/assets/kaila-taylor-licensed-massage-therapist.jpg"
+                alt="Kaila Taylor, Licensed Massage Therapist at Roosters Health Store in Columbia, IL"
+                loading="lazy"
+                decoding="async"
+                width="400"
+                height="220"
+              />
+            </div>
+            <div class="practitioner-body">
+              <div class="practitioner-role">Licensed Massage Therapist</div>
+              <h3 class="practitioner-name">Kaila Taylor, LMT</h3>
+              <p class="practitioner-bio">
+                Kaila offers holistic bodywork rooted in therapeutic care. Whether
+                you're healing, recovering, or resetting, she meets you where
+                you are.
+              </p>
+              <ul class="practitioner-tags" aria-label="Services offered">
+                {['Swedish Massage', 'Reiki', 'Cupping', 'Lymphatic Drainage', 'Prenatal Massage'].map((tag) => (
+                  <li class="practitioner-tag">{tag}</li>
+                ))}
+              </ul>
+              <a href={kailaBookingUrl} class="btn practitioner-cta" target="_blank" rel="noopener noreferrer">
+                Book with Kaila &#8594;
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section class="reviews-section" aria-labelledby="reviews-heading">
+      <div class="inner fade-in">
+        <div class="section-header">
+          <span class="label">What Neighbors Say</span>
+          <h2 id="reviews-heading" class="cream-heading">
+            It's not just a store, it's a <em>community.</em>
+          </h2>
+        </div>
+        <ul class="reviews-grid" aria-label="Customer reviews">
+          {reviews.map((review) => (
+            <li class="review-card" style={`--card-rotate: ${review.rotate}; margin-top: ${review.mt};`}>
+              <div class="review-stars" aria-label={`${review.stars} out of 5 stars`}>
+                {Array.from({ length: review.stars }).map(() => (
+                  <span class="review-star" aria-hidden="true">&#9733;</span>
+                ))}
+              </div>
+              <blockquote class="review-text">
+                <p>&#8220;{review.text}&#8221;</p>
+              </blockquote>
+              <p class="review-author">&#8212; {review.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- ── BATCH 4: FAQ + Special Orders + About + Contact ────────── -->
+    <!-- FAQ -->
+    <section id="faq" class="faq-section-wrap" aria-labelledby="faq-heading">
+      <div class="inner fade-in">
+        <div class="section-header" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+          <span class="label">FAQ</span>
+          <h2 id="faq-heading" class="sky-heading">
+            Questions we hear <em>all the time.</em>
+          </h2>
+        </div>
+        <div style="max-width: 800px; margin: 0 auto;">
+          <FAQ />
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL ORDERS -->
+    <section class="special-orders-section" aria-labelledby="special-orders-heading">
+      <div class="inner fade-in">
+        <span class="label">Special Orders</span>
+        <h2 id="special-orders-heading" class="sky-heading">
+          Can't find it? <em>We'll source it.</em>
+        </h2>
+        <p class="special-orders-desc">
+          We specialize in tracking down the specific products, supplements, or
+          specialty foods you're looking for. Just ask — that's what being a
+          community store means.
+        </p>
+        <a href="#contact" class="btn">Make a Special Order Request</a>
+      </div>
+    </section>
+
+    <!-- ABOUT / OUR STORY -->
+    <section id="about" class="about-section" aria-labelledby="about-heading">
+      <div class="inner fade-in">
+        <div class="section-header">
+          <span class="label">Our Story</span>
+          <h2 id="about-heading" class="cream-heading">
+            A personal journey.<br /><em>A community calling.</em>
+          </h2>
+        </div>
+        <div class="about-photos">
+          <div class="about-photo">
+            <img
+              src="/assets/michelle_joe_family_photo.jpg"
+              alt="Michelle Swan and her son Joe — the family whose personal health journey inspired Rooster's Health Store"
+              loading="lazy"
+              decoding="async"
+              width="570"
+              height="760"
+            />
+          </div>
+        </div>
+        <div class="about-body">
+          <p>
+            In 2018, my son, Joe, and I were devastated when we lost my husband to
+            an aggressive form of cancer. At only 50 years old, I couldn't help but
+            wonder what caused his illness and how it could have been prevented.
+            While there were no concrete answers to my questions, I discovered
+            through extensive research that many cancer-causing chemicals were in
+            some of our daily toiletries, the foods we were eating, and the
+            cleaning supplies we used.
+          </p>
+          <p>
+            As I began to eliminate those products from our lives, I also began to
+            implement natural foods and supplements that would boost our immunity
+            levels in an effort to better our health.
+          </p>
+          <blockquote class="about-blockquote">
+            <p>
+              "Since purchasing the store, I've met many friends who are either
+              beginning or continuing their journey to wellness, and it brings me
+              joy to provide every resource I can to help them along the way."
+            </p>
+          </blockquote>
+          <p>
+            Not long after that, a health food store in Columbia owned by Marsha
+            and Ken Hahn since 1995 became available — and I saw the opportunity as
+            a God-wink. If I could share the knowledge I'd gained from my own
+            family's experience, perhaps I could make a difference in the lives
+            of others.
+          </p>
+          <div class="about-founder">
+            <div class="about-founder-avatar" aria-hidden="true">
+              <img
+                src="/assets/michelle_joe_family_photo.jpg"
+                alt=""
+                loading="lazy"
+                decoding="async"
+                width="46"
+                height="46"
+              />
+            </div>
+            <div>
+              <p class="about-founder-name">Michelle Swan</p>
+              <p class="about-founder-role">Owner, {BUSINESS.name} since 2018</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+      <div class="contact-inner fade-in">
+        <div>
+          <span class="label">Find Us</span>
+          <h2 id="contact-heading" class="cream-heading">
+            Come say hello —<br /><em>we'd love to meet you.</em>
+          </h2>
+          <p class="contact-intro">
+            We're in Columbia, IL — stop in any time during our hours, or send us
+            a message and we'll get right back to you.
+          </p>
+          <ul class="contact-info-items" aria-label="Contact information">
+            <li class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <p class="contact-info-label">Address</p>
+                <address class="contact-info-value not-italic">
+                  {BUSINESS.streetAddress}<br />
+                  {BUSINESS.addressLocality}, {BUSINESS.addressRegion} {BUSINESS.postalCode}
+                </address>
+              </div>
+            </li>
+            <li class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <p class="contact-info-label">Phone</p>
+                <a href={`tel:${BUSINESS.phone.replace(/[^+\d]/g, '')}`} class="contact-info-value">
+                  {BUSINESS.phone}
+                </a>
+              </div>
+            </li>
+            <li class="contact-info-item">
+              <div class="contact-info-icon" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div>
+                <p class="contact-info-label">Hours</p>
+                <ul class="contact-info-value" aria-label="Store hours">
+                  {BUSINESS.hours.filter(h => h.hours !== 'Closed').map((h) => (
+                    <li>{h.days}: {h.hours}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="contact-form-wrap">
+          <h3 class="contact-form-title">Send us a message</h3>
+          <p class="contact-form-sub">
+            Questions, special orders, or just saying hi — we read every one.
+          </p>
+          <ContactForm accessKey={accessKey} subject="New enquiry from roostershealthstore.com" client:visible />
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>
-      {BUSINESS.name} &bull; {BUSINESS.phone} &bull; {BUSINESS.streetAddress},{' '}
-      {BUSINESS.addressLocality}, {BUSINESS.addressRegion} {BUSINESS.postalCode}
-    </p>
-    <p style="color: #e11d48; font-weight: bold;">
-      PLACEHOLDER PAGE — replace with client design before launch
-    </p>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img
+            src={BUSINESS.logo}
+            alt={BUSINESS.name}
+            width="200"
+            height="56"
+            loading="lazy"
+            decoding="async"
+          />
+          <p class="footer-tagline">
+            Columbia, Illinois — Community Wellness Since {BUSINESS.foundingDate}
+          </p>
+          <address class="footer-nap not-italic">
+            {BUSINESS.streetAddress}<br />
+            {BUSINESS.addressLocality}, {BUSINESS.addressRegion} {BUSINESS.postalCode}<br />
+            <a href={`tel:${BUSINESS.phone.replace(/[^+\d]/g, '')}`}>{BUSINESS.phone}</a>
+          </address>
+        </div>
+
+        <nav class="footer-nav-cols" aria-label="Footer navigation">
+          <div class="footer-col">
+            <p class="footer-col-head">Shop</p>
+            <a href="#services" class="footer-col-link">Natural Grocery</a>
+            <a href="#services" class="footer-col-link">Supplements</a>
+            <a href="#services" class="footer-col-link">Health &amp; Beauty</a>
+            <a href="#contact"  class="footer-col-link">Special Orders</a>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-head">Visit</p>
+            <a href="#bar"     class="footer-col-link">Wellness Bar</a>
+            <a href="https://theroost.com" class="footer-col-link" target="_blank" rel="noopener noreferrer">The RooSt</a>
+            <a href="#team"    class="footer-col-link">Practitioners</a>
+            <a href="#contact" class="footer-col-link">Contact Us</a>
+          </div>
+          <div class="footer-col">
+            <p class="footer-col-head">Follow</p>
+            {BUSINESS.social.instagram && (
+              <a href={BUSINESS.social.instagram} class="footer-col-link" target="_blank" rel="noopener noreferrer">Instagram</a>
+            )}
+            {BUSINESS.social.facebook && (
+              <a href={BUSINESS.social.facebook} class="footer-col-link" target="_blank" rel="noopener noreferrer">Facebook</a>
+            )}
+            {BUSINESS.social.googleBusinessProfile && (
+              <a href={BUSINESS.social.googleBusinessProfile} class="footer-col-link" target="_blank" rel="noopener noreferrer">Google Reviews</a>
+            )}
+          </div>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          &copy; {new Date().getFullYear()} {BUSINESS.name}. All rights reserved.
+        </p>
+        <p class="footer-credit">
+          Built by <span>Digital Downtown Main</span>
+        </p>
+      </div>
+    </div>
   </footer>
 </BaseLayout>
+
+<style is:global>
+/* ── RESET + TOKENS ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: #fdf6ee;
+  color: #2d1a0e;
+  font-family: 'DM Sans', Arial, sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+:root {
+  --cream:      #fdf6ee;
+  --sky:        #d9ecf5;
+  --sky2:       #c2dff0;
+  --navy:       #1c3448;
+  --navy2:      #254560;
+  --red:        #c5362b;
+  --red-hover:  #a62d22;
+  --red-dim:    rgba(197,54,43,0.09);
+  --red-border: rgba(197,54,43,0.22);
+  --blue:       #4a8fb5;
+  --text:       #2d1a0e;
+  --muted:      rgba(45,26,14,0.62);
+  --subtle:     rgba(45,26,14,0.38);
+  --border:     rgba(45,26,14,0.10);
+  --white:      #ffffff;
+  --head:       'Playfair Display', Georgia, serif;
+  --body:       'DM Sans', Arial, sans-serif;
+  --ease:       cubic-bezier(0.4,0,0.2,1);
+  --nav-h:      72px;
+  --max-w:      1160px;
+}
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; border: none; background: none; font-family: var(--body); }
+address { font-style: normal; }
+.not-italic { font-style: normal; }
+
+/* ── UTILITIES ───────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+}
+.inner { max-width: var(--max-w); margin: 0 auto; }
+
+/* ── SCROLL FADE ─────────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── LABELS ──────────────────────────────────────────────────────── */
+.label {
+  display: inline-flex; align-items: center;
+  font-family: var(--body); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 5px 16px; border-radius: 100px; margin-bottom: 20px;
+  color: var(--red); background: var(--red-dim); border: 1px solid var(--red-border);
+}
+.label--light {
+  color: var(--sky2); background: rgba(217,236,245,0.18); border-color: rgba(217,236,245,0.28);
+}
+
+/* ── SECTION HEADINGS ────────────────────────────────────────────── */
+.section-header { text-align: center; margin-bottom: 52px; }
+.section-header p {
+  color: var(--muted); max-width: 580px; margin: 10px auto 0;
+  line-height: 1.72; font-size: 1rem;
+}
+.sky-heading {
+  font-family: var(--head); font-size: clamp(1.8rem,3.2vw,2.75rem);
+  font-weight: 700; line-height: 1.12; color: var(--navy);
+}
+.sky-heading em { font-style: italic; }
+.cream-heading {
+  font-family: var(--head); font-size: clamp(1.8rem,3.2vw,2.75rem);
+  font-weight: 700; line-height: 1.12; color: var(--text); margin-bottom: 22px;
+}
+.cream-heading em { font-style: italic; }
+
+/* ── BUTTONS ─────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--body); font-size: 0.925rem; font-weight: 700;
+  letter-spacing: 0.025em; padding: 13px 28px; border-radius: 8px;
+  background: var(--red); color: var(--white);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  transition: background 0.22s var(--ease), transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+  white-space: nowrap; border: 1px solid transparent;
+}
+.btn:hover, .btn:focus-visible {
+  background: var(--red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px var(--red-dim), 0 4px 12px rgba(0,0,0,0.25);
+}
+.btn:focus-visible { outline: 3px solid rgba(197,54,43,0.5); outline-offset: 3px; }
+.btn--nav   { padding: 10px 22px; font-size: 0.875rem; }
+.btn--ghost-light {
+  background: transparent; color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.25); box-shadow: none;
+}
+.btn--ghost-light:hover, .btn--ghost-light:focus-visible {
+  background: rgba(255,255,255,0.15); color: var(--white);
+  border-color: rgba(255,255,255,0.45); box-shadow: none;
+}
+.btn--ghost-navy {
+  background: transparent; color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.25); box-shadow: none;
+}
+.btn--ghost-navy:hover, .btn--ghost-navy:focus-visible {
+  background: rgba(255,255,255,0.1); color: var(--white);
+  border-color: rgba(255,255,255,0.4); box-shadow: none;
+}
+
+/* ── NAV ─────────────────────────────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: var(--nav-h); z-index: 100;
+  background: rgba(28,52,72,0.82);
+  backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid transparent;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.site-header.scrolled {
+  background: rgba(28,52,72,0.97);
+  border-bottom-color: rgba(255,255,255,0.08);
+}
+.nav-inner {
+  max-width: var(--max-w); width: 100%; margin: 0 auto; height: 100%;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; gap: 24px;
+}
+.logo-link { flex-shrink: 0; }
+.nav-logo   { height: auto; width: 200px; display: block; }
+.desktop-nav { display: flex; align-items: center; gap: 32px; }
+.nav-links   { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  font-family: var(--body); font-size: 0.9rem; font-weight: 600;
+  color: rgba(255,255,255,0.72);
+  padding: 4px 0; border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.nav-links a:hover, .nav-links a:focus-visible {
+  color: var(--white); border-bottom-color: var(--red);
+}
+.mobile-nav-wrap { display: none; }
+
+/* ── HERO ────────────────────────────────────────────────────────── */
+.hero {
+  position: relative; min-height: 100vh; overflow: hidden;
+  background: var(--navy); display: flex; align-items: center;
+  padding-top: var(--nav-h);
+}
+.hero-slides { position: absolute; inset: 0; }
+.hero-slide  { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s var(--ease); }
+.hero-slide.active { opacity: 1; }
+.hero-img    { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to right, rgba(28,52,72,0.88) 45%, rgba(28,52,72,0.2) 100%);
+}
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: var(--max-w); margin: 0 auto; padding: 0 28px; width: 100%;
+}
+.hero-h1 {
+  font-family: var(--head); font-size: clamp(2.8rem,6vw,5rem); font-weight: 900;
+  color: var(--white); line-height: 1.08; letter-spacing: -0.03em;
+  max-width: 680px; margin-bottom: 36px;
+}
+.hero-h1 em { font-style: italic; }
+.hero-sub {
+  font-family: var(--body); font-size: 1.1rem;
+  color: rgba(255,255,255,0.75); max-width: 500px;
+  line-height: 1.7; margin-bottom: 38px;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-controls {
+  position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+  z-index: 3; display: flex; align-items: center; gap: 12px;
+}
+.hero-arrow {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  color: var(--white); font-size: 20px; line-height: 1;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.hero-arrow:hover, .hero-arrow:focus-visible {
+  background: rgba(255,255,255,0.22);
+}
+.hero-arrow:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 2px; }
+.hero-dots { display: flex; align-items: center; gap: 6px; }
+.hero-dot {
+  height: 8px; width: 8px; border-radius: 4px; padding: 0;
+  background: rgba(255,255,255,0.3); transition: all 0.3s var(--ease);
+}
+.hero-dot.active { width: 24px; background: var(--red); }
+.hero-dot:focus-visible { outline: 2px solid rgba(255,255,255,0.6); outline-offset: 3px; }
+.hero-photo-label {
+  position: absolute; bottom: 26px; right: 40px; z-index: 3;
+  font-family: var(--body); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: rgba(255,255,255,0.45);
+  display: flex; align-items: center;
+}
+
+/* ── SERVICES ────────────────────────────────────────────────────── */
+.services-section { background: var(--sky); padding: 108px 28px; position: relative; overflow: hidden; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 22px;
+  max-width: 900px; margin: 0 auto;
+}
+.service-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: 18px; padding: 34px 28px;
+  box-shadow: 0 4px 22px rgba(0,0,0,0.07);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+  position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(to right, transparent, var(--red), transparent);
+  opacity: 0; transition: opacity 0.25s var(--ease);
+}
+.service-card:hover { border-color: var(--red-border); box-shadow: 0 12px 44px rgba(0,0,0,0.12); transform: translateY(-5px); }
+.service-card:hover::before { opacity: 1; }
+.service-icon {
+  width: 52px; height: 52px; background: var(--red-dim); border: 1px solid var(--red-border);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  color: var(--red); margin-bottom: 22px;
+}
+.service-label {
+  font-family: var(--body); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); margin-bottom: 8px;
+}
+.service-title {
+  font-family: var(--head); font-size: 1.25rem; font-weight: 700;
+  color: var(--text); margin-bottom: 12px; line-height: 1.2;
+}
+.service-desc { color: var(--muted); line-height: 1.7; font-size: 0.95rem; }
+
+/* ── COUNTER-SCROLLING STRIP ─────────────────────────────────────── */
+@keyframes strip-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes strip-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+.offer-strip {
+  margin: 52px -28px 0; overflow: hidden;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.offer-strip-row { overflow: hidden; }
+.offer-strip-track { display: flex; gap: 12px; width: max-content; }
+.offer-strip-left  { animation: strip-left  28s linear infinite; }
+.offer-strip-right { animation: strip-right 28s linear infinite; }
+.offer-strip-card  { flex-shrink: 0; width: 320px; height: 220px; border-radius: 14px; overflow: hidden; }
+.offer-strip-card img { width: 100%; height: 100%; object-fit: cover; }
+@media (prefers-reduced-motion: reduce) {
+  .offer-strip-left, .offer-strip-right { animation-play-state: paused; }
+}
+
+
+/* ── WELLNESS BAR ────────────────────────────────────────────────── */
+.wellness-bar-section { background: var(--cream); padding: 108px 28px; }
+.wellness-bar-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.wellness-bar-photo { border-radius: 24px; overflow: hidden; height: 440px; }
+.wellness-bar-photo img { width: 100%; height: 100%; object-fit: cover; }
+.wellness-bar-content h2 { margin-bottom: 22px; }
+.wellness-bar-desc { color: var(--muted); line-height: 1.78; margin-bottom: 22px; font-size: 1.02rem; }
+.wellness-bar-checklist {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 32px;
+}
+.wellness-bar-check { display: flex; gap: 10px; align-items: flex-start; }
+.wellness-bar-check svg { flex-shrink: 0; margin-top: 2px; }
+.wellness-bar-check span { font-family: var(--body); font-size: 0.9rem; font-weight: 600; color: var(--text); }
+
+/* ── THE ROOST ───────────────────────────────────────────────────── */
+.roost-section {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  padding: 80px 28px; position: relative; overflow: hidden;
+}
+.roost-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 48px; flex-wrap: wrap;
+}
+.roost-content { flex: 1; min-width: 280px; }
+.roost-content h2 {
+  font-family: var(--head); font-size: clamp(1.6rem,3vw,2.5rem);
+  font-weight: 700; color: var(--white); line-height: 1.12; margin-bottom: 16px;
+}
+.roost-content h2 em { font-style: italic; }
+.roost-content p { color: rgba(255,255,255,0.68); line-height: 1.72; max-width: 540px; font-size: 1rem; }
+.roost-right { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; flex-shrink: 0; }
+.roost-pills { display: flex; flex-direction: column; gap: 14px; }
+.roost-pill {
+  display: flex; gap: 10px; align-items: center;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px; padding: 9px 18px;
+}
+.roost-pill span { font-family: var(--body); font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+
+/* ── TEAM / PRACTITIONERS ────────────────────────────────────────── */
+.team-section { background: var(--sky); padding: 108px 28px; position: relative; overflow: hidden; }
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+  gap: 28px; max-width: 820px; margin: 0 auto;
+}
+.practitioner-card {
+  background: var(--white); border-radius: 20px; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: 0 4px 22px rgba(0,0,0,0.07);
+}
+.practitioner-photo {
+  height: 280px; background: linear-gradient(135deg, var(--sky2), #b8d8ee);
+  display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.practitioner-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.practitioner-body { padding: 28px; }
+.practitioner-role {
+  font-family: var(--body); font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--blue); margin-bottom: 6px;
+}
+.practitioner-name {
+  font-family: var(--head); font-size: 1.35rem; font-weight: 700;
+  color: var(--text); margin-bottom: 10px;
+}
+.practitioner-bio { color: var(--muted); line-height: 1.68; font-size: 0.92rem; margin-bottom: 18px; }
+.practitioner-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+.practitioner-tag {
+  font-family: var(--body); font-size: 11px; font-weight: 600;
+  color: var(--navy); background: var(--sky); border-radius: 100px; padding: 4px 12px;
+}
+.practitioner-cta { width: 100%; justify-content: center; }
+
+/* ── REVIEWS ─────────────────────────────────────────────────────── */
+.reviews-section { background: var(--cream); padding: 108px 28px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; align-items: start; }
+.review-card {
+  background: var(--white); border-radius: 18px; padding: 28px;
+  border: 1px solid var(--border); box-shadow: 0 4px 22px rgba(0,0,0,0.08);
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  transform: rotate(var(--card-rotate, 0deg));
+}
+.review-card:hover {
+  border-color: var(--red-border); box-shadow: 0 16px 44px rgba(0,0,0,0.13);
+  transform: rotate(var(--card-rotate, 0deg)) scale(1.03);
+}
+.review-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.review-star  { color: #e6a020; font-size: 15px; }
+.review-text  {
+  font-family: var(--head); font-size: 1rem; font-style: italic;
+  color: var(--text); line-height: 1.65; margin-bottom: 18px;
+}
+.review-author { font-family: var(--body); font-size: 0.85rem; font-weight: 700; color: var(--muted); }
+
+/* ── FAQ ─────────────────────────────────────────────────────────── */
+.faq-section-wrap {
+  background: var(--sky); padding: 90px 28px; position: relative; overflow: hidden;
+}
+.faq-list { display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  background: var(--white); border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+.faq-item[open] { border-color: var(--red-border); box-shadow: 0 6px 28px rgba(0,0,0,0.09); }
+.faq-summary {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 20px 24px; gap: 16px; list-style: none; cursor: pointer;
+  user-select: none;
+}
+.faq-summary::-webkit-details-marker { display: none; }
+.faq-summary:focus-visible { outline: 2px solid var(--red-border); outline-offset: -2px; border-radius: 14px; }
+.faq-q {
+  font-family: var(--head); font-size: 1rem; font-weight: 700;
+  color: var(--text); line-height: 1.3;
+}
+.faq-icon {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--red-dim); color: var(--red);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 300; line-height: 1; font-family: var(--body);
+  transition: background 0.25s var(--ease), color 0.25s var(--ease);
+}
+.faq-icon::after { content: '+'; }
+.faq-item[open] .faq-icon { background: var(--red); color: var(--white); }
+.faq-item[open] .faq-icon::after { content: '\2212'; }
+.faq-body { padding: 0 24px 20px; }
+.faq-body p { font-family: var(--body); font-size: 0.95rem; color: var(--muted); line-height: 1.72; }
+
+/* ── SPECIAL ORDERS ──────────────────────────────────────────────── */
+.special-orders-section {
+  background: var(--sky); padding: 80px 28px;
+  position: relative; overflow: hidden; text-align: center;
+}
+.special-orders-section .inner { display: flex; flex-direction: column; align-items: center; }
+.special-orders-section h2 { margin-bottom: 16px; }
+.special-orders-desc {
+  color: var(--muted); line-height: 1.72; margin-bottom: 30px;
+  font-size: 1rem; max-width: 600px;
+}
+
+/* ── ABOUT / OUR STORY ───────────────────────────────────────────── */
+.about-section { background: var(--cream); padding: 72px 28px; position: relative; overflow: hidden; }
+.about-photos { max-width: 600px; margin: 0 auto 36px; }
+.about-photo { border-radius: 16px; overflow: hidden; }
+.about-photo img { width: 100%; height: auto; display: block; object-fit: cover; object-position: center 20%; }
+.about-body {
+  max-width: 760px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 16px;
+}
+.about-body p { color: var(--text); line-height: 1.75; font-size: 0.98rem; }
+.about-blockquote {
+  border-left: 3px solid var(--red); background: var(--red-dim);
+  border-radius: 0 10px 10px 0; padding: 16px 20px;
+}
+.about-blockquote p {
+  font-family: var(--head); font-size: 1rem; font-style: italic;
+  color: var(--text); line-height: 1.65;
+}
+.about-founder { display: flex; align-items: center; gap: 14px; margin-top: 8px; }
+.about-founder-avatar {
+  width: 46px; height: 46px; border-radius: 50%;
+  overflow: hidden; flex-shrink: 0; background: var(--sky);
+}
+.about-founder-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.about-founder-name { font-family: var(--head); font-size: 1rem; font-weight: 700; color: var(--text); }
+.about-founder-role { font-family: var(--body); font-size: 0.82rem; color: var(--muted); }
+
+/* ── CONTACT ─────────────────────────────────────────────────────── */
+.contact-section { background: var(--cream); padding: 108px 28px; }
+.contact-inner {
+  max-width: var(--max-w); margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.contact-intro { color: var(--muted); line-height: 1.72; margin-bottom: 32px; }
+.contact-info-items { display: flex; flex-direction: column; gap: 20px; }
+.contact-info-item { display: flex; gap: 16px; align-items: flex-start; }
+.contact-info-icon {
+  width: 44px; height: 44px; background: var(--red-dim);
+  border: 1px solid var(--red-border); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--red); flex-shrink: 0;
+}
+.contact-info-label {
+  font-family: var(--body); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--subtle); margin-bottom: 4px;
+}
+.contact-info-value {
+  font-family: var(--body); font-size: 0.95rem; color: var(--text);
+  font-weight: 500; line-height: 1.55; display: block;
+}
+a.contact-info-value:hover { color: var(--red); }
+
+/* Contact form wrapper */
+.contact-form-wrap {
+  background: var(--white); border-radius: 22px; padding: 40px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.09); border: 1px solid var(--border);
+}
+.contact-form-title {
+  font-family: var(--head); font-size: 1.5rem; color: var(--text); margin-bottom: 6px;
+}
+.contact-form-sub {
+  font-family: var(--body); font-size: 0.92rem; color: var(--muted); margin-bottom: 28px;
+}
+/* ContactForm inner elements */
+.contact-form-wrap form { display: flex; flex-direction: column; gap: 14px; }
+.contact-form-wrap label {
+  font-family: var(--body); font-size: 0.82rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--subtle);
+  display: block; margin-bottom: 5px;
+}
+.contact-form-wrap input,
+.contact-form-wrap textarea {
+  font-family: var(--body); font-size: 0.92rem;
+  padding: 12px 14px; border-radius: 10px;
+  border: 1px solid var(--border); outline: none;
+  color: var(--text); background: #fafaf8; width: 100%;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.contact-form-wrap input:focus,
+.contact-form-wrap textarea:focus {
+  border-color: var(--red-border); box-shadow: 0 0 0 3px var(--red-dim);
+}
+.contact-form-wrap textarea { resize: vertical; min-height: 110px; }
+.contact-form-wrap button[type="submit"] {
+  background: var(--red); color: var(--white);
+  font-family: var(--body); font-size: 0.925rem; font-weight: 700;
+  padding: 13px 28px; border-radius: 8px; border: none;
+  cursor: pointer; width: 100%;
+  transition: background 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.contact-form-wrap button[type="submit"]:hover,
+.contact-form-wrap button[type="submit"]:focus-visible {
+  background: var(--red-hover); transform: translateY(-2px);
+}
+.contact-form-wrap button[type="submit"]:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+/* ── FOOTER ──────────────────────────────────────────────────────── */
+.site-footer { background: var(--navy); padding: 52px 28px 32px; position: relative; overflow: hidden; }
+.footer-inner { max-width: var(--max-w); margin: 0 auto; }
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 32px; margin-bottom: 40px;
+}
+.footer-brand img { height: auto; width: 200px; display: block; margin-bottom: 10px; }
+.footer-tagline { font-family: var(--body); font-size: 0.88rem; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.footer-nap { font-family: var(--body); font-size: 0.88rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+.footer-nap a { color: rgba(255,255,255,0.6); transition: color 0.2s; }
+.footer-nap a:hover { color: rgba(255,255,255,0.85); }
+.footer-nav-cols { display: flex; gap: 48px; flex-wrap: wrap; }
+.footer-col-head {
+  font-family: var(--body); font-size: 11px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35); margin-bottom: 14px;
+}
+.footer-col-link {
+  font-family: var(--body); font-size: 0.88rem; color: rgba(255,255,255,0.6);
+  margin-bottom: 8px; display: block; transition: color 0.2s;
+}
+.footer-col-link:hover { color: rgba(255,255,255,0.85); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px;
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+}
+.footer-copy, .footer-credit { font-family: var(--body); font-size: 0.82rem; color: rgba(255,255,255,0.32); }
+.footer-credit span { color: rgba(255,255,255,0.5); }
+
+/* ── RESPONSIVE ──────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .services-grid         { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+  .wellness-bar-inner    { grid-template-columns: 1fr; gap: 40px; }
+  .roost-inner           { flex-direction: column; }
+  .roost-right           { align-items: flex-start; }
+  .reviews-grid          { grid-template-columns: repeat(2,1fr); }
+  .about-photos          { grid-template-columns: 1fr; }
+  .contact-inner         { grid-template-columns: 1fr; gap: 48px; }
+  .footer-top            { flex-direction: column; }
+}
+@media (max-width: 768px) {
+  .desktop-nav    { display: none; }
+  .mobile-nav-wrap { display: block; }
+  /* MobileMenu island styles */
+  .mobile-nav-wrap nav { position: relative; }
+  .mobile-nav-wrap nav > button {
+    background: transparent; color: var(--white);
+    font-size: 1.4rem; padding: 8px; display: flex; align-items: center;
+  }
+  .mobile-nav-wrap ul {
+    position: absolute; top: calc(var(--nav-h) - 72px + 8px); right: -28px;
+    background: rgba(28,52,72,0.98); padding: 16px 28px 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.1); min-width: 200px;
+    display: flex; flex-direction: column; gap: 4px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .mobile-nav-wrap ul[hidden] { display: none; }
+  .mobile-nav-wrap ul a {
+    font-family: var(--body); font-size: 1rem; font-weight: 600;
+    color: rgba(255,255,255,0.85); padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06); display: block;
+    transition: color 0.2s;
+  }
+  .mobile-nav-wrap ul li:last-child a { border-bottom: none; }
+  .mobile-nav-wrap ul a:hover { color: var(--white); }
+}
+@media (max-width: 640px) {
+  .hero-overlay { background: linear-gradient(to bottom, rgba(28,52,72,0.85) 60%, rgba(28,52,72,0.5) 100%); }
+  .hero-photo-label { display: none; }
+  .hero-ctas { flex-direction: column; align-items: flex-start; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .wellness-bar-photo { height: 280px; }
+  .wellness-bar-checklist { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .footer-nav-cols { gap: 28px; }
+  .roost-right { width: 100%; }
+}
+@media (min-width: 768px) {
+  .practitioner-photo { height: 360px; }
+}
+</style>
+
+<script>
+  // ── Nav scroll effect ──────────────────────────────────────────────
+  const header = document.querySelector('.site-header') as HTMLElement | null;
+  function syncNav() {
+    header?.classList.toggle('scrolled', window.scrollY > 40);
+  }
+  window.addEventListener('scroll', syncNav, { passive: true });
+  syncNav();
+
+  // ── Hero carousel ──────────────────────────────────────────────────
+  const heroEl = document.querySelector('.hero') as HTMLElement | null;
+  if (heroEl) {
+    const slides      = [...document.querySelectorAll<HTMLElement>('.hero-slide')];
+    const dots        = [...document.querySelectorAll<HTMLButtonElement>('.hero-dot')];
+    const labelEl     = document.getElementById('hero-label-text');
+    const slideLabels = dots.map(d =>
+      (d.getAttribute('aria-label') ?? '').replace(/^Slide \d+:\s*/, '')
+    );
+
+    let cur    = 0;
+    let paused = false;
+    let timer: ReturnType<typeof setInterval>;
+
+    function goTo(n: number) {
+      slides[cur].classList.remove('active');
+      dots[cur].classList.remove('active');
+      dots[cur].setAttribute('aria-pressed', 'false');
+      cur = ((n % slides.length) + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dots[cur].classList.add('active');
+      dots[cur].setAttribute('aria-pressed', 'true');
+      if (labelEl) labelEl.textContent = slideLabels[cur];
+    }
+
+    function startTimer() {
+      clearInterval(timer);
+      if (!paused) timer = setInterval(() => goTo(cur + 1), 5000);
+    }
+    function pause()  { paused = true;  clearInterval(timer); }
+    function resume() { paused = false; startTimer(); }
+
+    // Pause on hover AND keyboard focus within the hero
+    heroEl.addEventListener('mouseenter', pause);
+    heroEl.addEventListener('mouseleave', resume);
+    heroEl.addEventListener('focusin',    pause);
+    heroEl.addEventListener('focusout', (e: FocusEvent) => {
+      if (!heroEl.contains(e.relatedTarget as Node)) resume();
+    });
+
+    (document.querySelector('.hero-prev') as HTMLButtonElement)
+      ?.addEventListener('click', () => goTo(cur - 1));
+    (document.querySelector('.hero-next') as HTMLButtonElement)
+      ?.addEventListener('click', () => goTo(cur + 1));
+    dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+    startTimer();
+  }
+
+  // ── Scroll fade-in ─────────────────────────────────────────────────
+  const fadeEls = document.querySelectorAll('.fade-in');
+  if (fadeEls.length && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    fadeEls.forEach((el) => obs.observe(el));
+  } else {
+    fadeEls.forEach((el) => el.classList.add('visible'));
+  }
+</script>
