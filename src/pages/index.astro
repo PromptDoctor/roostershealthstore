@@ -99,7 +99,7 @@ const featuredServices = [
   {
     label: 'Wellness Bar',
     title: "Monroe County's Only Wellness Bar",
-    desc: 'Organic remedy teas, smoothies crafted for your health goals, kombucha on tap, and frappes without the junk. Our bar staff double as wellness coaches.',
+    desc: 'Organic remedy teas, smoothies crafted for your health goals, bottled kombucha, and frappes without the junk. Our bar staff double as wellness coaches.',
     icon: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
   },
   {
@@ -345,7 +345,7 @@ const reviews = [
             you browse.
           </p>
           <ul class="wellness-bar-checklist" aria-label="Bar offerings">
-            {['Organic Remedy Teas', 'Custom Smoothies', 'Kombucha on Tap', 'Refreshers & Frappes'].map((item) => (
+            {['Organic Remedy Teas', 'Custom Smoothies', 'Bottled Kombucha', 'Refreshers & Frappes'].map((item) => (
               <li class="wellness-bar-check">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                 <span>{item}</span>
@@ -354,6 +354,30 @@ const reviews = [
           </ul>
           <a href="#contact" class="btn">Try the Bar</a>
         </div>
+      </div>
+      <div class="bar-menu-gallery" aria-label="Wellness Bar menus">
+        <figure class="bar-menu-card">
+          <img
+            src="/assets/wellness_bar_menu_1.jpg"
+            alt="Roosters Wellness Bar specialty smoothie menu featuring 16 named smoothie creations with ingredients and health benefits"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="800"
+          />
+          <figcaption>Specialty Smoothie Creations</figcaption>
+        </figure>
+        <figure class="bar-menu-card">
+          <img
+            src="/assets/wellness_bar_menu_2.jpg"
+            alt="Roosters Wellness Bar build-your-own smoothie menu and wellness shots guide"
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="800"
+          />
+          <figcaption>Build Your Own &amp; Wellness Shots</figcaption>
+        </figure>
       </div>
     </section>
 
@@ -980,6 +1004,13 @@ address { font-style: normal; }
 .wellness-bar-check { display: flex; gap: 10px; align-items: flex-start; }
 .wellness-bar-check svg { flex-shrink: 0; margin-top: 2px; }
 .wellness-bar-check span { font-family: var(--body); font-size: 0.9rem; font-weight: 600; color: var(--text); }
+.bar-menu-gallery {
+  max-width: var(--max-w); margin: 64px auto 0;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.bar-menu-card { margin: 0; display: flex; flex-direction: column; gap: 12px; }
+.bar-menu-card img { width: 100%; border-radius: 16px; box-shadow: 0 4px 24px rgba(0,0,0,.10); }
+.bar-menu-card figcaption { text-align: center; font-family: var(--body); font-size: 0.85rem; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
 
 /* ── THE ROOST ───────────────────────────────────────────────────── */
 .roost-section {
@@ -1278,6 +1309,7 @@ a.contact-info-value:hover { color: var(--red); }
   .reviews-grid { grid-template-columns: 1fr; }
   .wellness-bar-photo { height: 280px; }
   .wellness-bar-checklist { grid-template-columns: 1fr; }
+  .bar-menu-gallery { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
   .footer-nav-cols { gap: 28px; }
   .roost-right { width: 100%; }
