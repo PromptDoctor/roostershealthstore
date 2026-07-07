@@ -22,8 +22,6 @@ const navLinks = [
   { label: 'Contact',      href: '#contact'  },
 ];
 
-const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? '';
-
 const heroSlides = [
   {
     src: '/assets/outside-rooster-statue-with-flowers.jpg',
@@ -646,7 +644,7 @@ const reviews = [
           <p class="contact-form-sub">
             Questions, special orders, or just saying hi — we read every one.
           </p>
-          <ContactForm accessKey={accessKey} subject="New enquiry from roostershealthstore.com" client:visible />
+          <ContactForm subject="New enquiry from roostershealthstore.com" client:visible />
         </div>
       </div>
     </section>

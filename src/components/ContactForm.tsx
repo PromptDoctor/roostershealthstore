@@ -1,18 +1,15 @@
 import { useState } from 'react';
 
 interface Props {
-  accessKey: string;
   subject?: string;
-  /** Submission endpoint — defaults to PUBLIC_WEB3FORMS_URL env var */
   endpoint?: string;
 }
 
 type Status = 'idle' | 'submitting' | 'success' | 'error';
 
 export default function ContactForm({
-  accessKey,
   subject = 'New website enquiry',
-  endpoint = import.meta.env.PUBLIC_WEB3FORMS_URL,
+  endpoint = '/.netlify/functions/contact',
 }: Props) {
   const [status, setStatus] = useState<Status>('idle');
 
@@ -38,7 +35,6 @@ export default function ContactForm({
 
   return (
     <form onSubmit={handleSubmit} noValidate>
-      <input type="hidden" name="access_key" value={accessKey} />
       <input type="hidden" name="subject" value={subject} />
       <input type="checkbox" name="botcheck" style={{ display: 'none' }} tabIndex={-1} aria-hidden="true" />
 
