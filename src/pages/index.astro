@@ -408,6 +408,39 @@ const reviews = [
           <a href="https://theroost.com" class="btn btn--ghost-navy" target="_blank" rel="noopener noreferrer">
             Learn More at TheRooSt.com &#8594;
           </a>
+        </div>
+      </div>
+
+      <div class="dnavibe-inner fade-in">
+        <div class="dnavibe-photo">
+          <img
+            src="/assets/dnavibe-jazz-band-red-light-therapy-device.jpg"
+            alt="DNAVibe Jazz Band wearable device glowing with red light therapy panels"
+            loading="lazy"
+            decoding="async"
+            width="540"
+            height="675"
+          />
+        </div>
+        <div class="dnavibe-content">
+          <span class="label label--light">Take It Home</span>
+          <h3>
+            Shop the SuperHuman Protocol,<br /><em>anytime.</em>
+          </h3>
+          <p>
+            The same red light, near-infrared, micro-vibration, and magnetic
+            pulse technology behind The RooSt — now in a wearable band you
+            can use at home, at work, or on the road. Available through our
+            partner, DNAVibe.
+          </p>
+          <ul class="dnavibe-features" aria-label="DNAVibe device features">
+            {['Four therapy modes in one device', 'FSA / HSA eligible', 'Patented, made in the USA', '60-day money-back guarantee'].map((item) => (
+              <li>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
           <a href="https://dnavibe.com/pages/TheRoost#INF-TheRoost" class="btn" target="_blank" rel="noopener noreferrer">
             Shop DNAVibe Equipment &#8594;
           </a>
@@ -1041,6 +1074,28 @@ address { font-style: normal; }
 }
 .roost-pill span { font-family: var(--body); font-size: 0.875rem; font-weight: 600; color: rgba(255,255,255,0.85); }
 
+.dnavibe-inner {
+  max-width: var(--max-w); margin: 56px auto 0;
+  display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 48px; align-items: center;
+  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 24px; padding: 40px;
+}
+.dnavibe-photo { border-radius: 18px; overflow: hidden; height: 340px; box-shadow: 0 0 60px rgba(197,54,43,0.28); }
+.dnavibe-photo img { width: 100%; height: 100%; object-fit: cover; }
+.dnavibe-content h3 {
+  font-family: var(--head); font-size: clamp(1.4rem,2.6vw,2rem);
+  font-weight: 700; color: var(--white); line-height: 1.15; margin-bottom: 14px;
+}
+.dnavibe-content h3 em { font-style: italic; }
+.dnavibe-content > p {
+  color: rgba(255,255,255,0.68); line-height: 1.72; font-size: 0.98rem;
+  margin-bottom: 24px; max-width: 520px;
+}
+.dnavibe-features { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; margin-bottom: 28px; }
+.dnavibe-features li { display: flex; gap: 9px; align-items: flex-start; }
+.dnavibe-features svg { flex-shrink: 0; margin-top: 2px; }
+.dnavibe-features span { font-family: var(--body); font-size: 0.85rem; font-weight: 600; color: rgba(255,255,255,0.85); }
+
 /* ── TEAM / PRACTITIONERS ────────────────────────────────────────── */
 .team-section { background: var(--sky); padding: 108px 28px; position: relative; overflow: hidden; }
 .team-grid {
@@ -1274,6 +1329,8 @@ a.contact-info-value:hover { color: var(--red); }
   .wellness-bar-inner    { grid-template-columns: 1fr; gap: 40px; }
   .roost-inner           { flex-direction: column; }
   .roost-right           { align-items: flex-start; }
+  .dnavibe-inner         { grid-template-columns: 1fr; gap: 32px; padding: 32px; }
+  .dnavibe-photo         { height: 280px; }
   .reviews-grid          { grid-template-columns: repeat(2,1fr); }
   .about-photos          { grid-template-columns: 1fr; }
   .contact-inner         { grid-template-columns: 1fr; gap: 48px; }
@@ -1316,6 +1373,8 @@ a.contact-info-value:hover { color: var(--red); }
   .team-grid { grid-template-columns: 1fr; }
   .footer-nav-cols { gap: 28px; }
   .roost-right { width: 100%; }
+  .dnavibe-features { grid-template-columns: 1fr; }
+  .dnavibe-inner { padding: 24px; }
 }
 @media (min-width: 768px) {
   .practitioner-photo { height: 360px; }
